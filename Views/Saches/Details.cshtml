@@ -1,0 +1,94 @@
+﻿@model QuanLyThuVien.Models.Sach
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thông tin chi tiết</h2>
+
+<div>
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TieuDe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TieuDe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TheLoai.TenTheLoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TheLoai.TenTheLoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TacGia_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TacGia.HoTen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NhaXuatBan_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhaXuatBan.TenNhaXuatBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayXuatBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayXuatBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoTrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoTrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnhBia)
+        </dt>
+
+        <dd>
+            <img src="@($"../../Content/images/Sach/{Model.AnhBia}")" alt="image not found" class="img-fluid" style="max-height: 20rem" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GioiThieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioiThieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+    </dl>
+</div>
+<div class="col-auto mb-3">
+    <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+        Quay lại
+    </a>
+    <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-primary">
+        Chỉnh sửa
+    </a>
+</div>

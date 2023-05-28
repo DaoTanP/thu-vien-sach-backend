@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <button class="btn btn-dark p-2" data-bs-toggle="collapse" data-bs-target="#sidebar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @Html.ActionLink("Library", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button class="navbar-toggler d-flex d-lg-none order-3 p-2" data-bs-toggle="offcanvas" data-bs-target="#navbar" aria-controls="bdNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas-lg offcanvas-end flex-grow-1 bg-dark" tabindex="-1" id="navbar" aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+                <div class="offcanvas-header px-4 pb-0">
+                    <h5 class="offcanvas-title text-white">Bootstrap</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#navbar"></button>
+                </div>
+
+                <div class="offcanvas-body p-4 pt-0 p-lg-0">
+                    <hr class="d-lg-none text-white-50">
+                    <ul class="navbar-nav flex-row flex-wrap">
+                        <li class="nav-item col-6 col-lg-auto">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link py-2 px-0 px-lg-2 active" })</li>
+                        <li class="nav-item col-6 col-lg-auto">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link py-2 px-0 px-lg-2" })</li>
+                        <li class="nav-item col-6 col-lg-auto">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link py-2 px-0 px-lg-2" })</li>
+                        <li class="nav-item col-6 col-lg-auto">@Html.ActionLink("API", "Contact", "Home", null, new { @class = "nav-link py-2 px-0 px-lg-2" })</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div id="sidebar" class="collapse collapse-horizontal show col-4, col-md-3 col-lg-2 px-0 border-end border-2 vh-100 overflow-auto">
+
+                <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" >
+                    <ul class="nav nav-pills flex-column mb-auto">
+
+                        <li class="btn-toggle-nav">@Html.ActionLink("Sách", "Index", "Saches", null, new { @class = "nav-link link-dark rounded" })</li>
+                        <li class="btn-toggle-nav">@Html.ActionLink("Thể loại", "Index", "TheLoais", null, new { @class = "nav-link link-dark rounded" })</li>
+                        <li class="btn-toggle-nav">@Html.ActionLink("Tác giả", "Index", "TacGias", null, new { @class = "nav-link link-dark rounded" })</li>
+                        <li class="btn-toggle-nav">@Html.ActionLink("Nhà xuất bản", "Index", "NhaXuatBans", null, new { @class = "nav-link link-dark rounded" })</li>
+                        
+                    </ul>
+                </div>
+
+            </div>
+            <main class="col">
+                <div class="container-fluid">
+                    @RenderBody()
+                    <hr />
+                    <footer>
+                        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                    </footer>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

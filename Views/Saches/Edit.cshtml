@@ -1,0 +1,112 @@
+﻿@model QuanLyThuVien.Models.Sach
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Chỉnh sửa bản ghi <strong>@Html.DisplayFor(model => model.TieuDe)</strong></h4>
+
+@using (Html.BeginForm("Edit", "Saches", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div class="col mb-3">
+                @Html.LabelFor(model => model.TieuDe, new { @class = "form-label" })
+                <div class="col">
+                    @Html.EditorFor(model => model.TieuDe, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TieuDe, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col mb-3">
+                @Html.LabelFor(model => model.TheLoai_Id, htmlAttributes: new { @class = "form-label " })
+                <div class="col">
+                    @Html.DropDownList("TheLoai_Id", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TheLoai_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col mb-3">
+                @Html.LabelFor(model => model.TacGia_Id, htmlAttributes: new { @class = "form-label " })
+                <div class="col">
+                    @Html.DropDownList("TacGia_Id", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TacGia_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col mb-3">
+                @Html.LabelFor(model => model.NhaXuatBan_Id, htmlAttributes: new { @class = "form-label " })
+                <div class="col">
+                    @Html.DropDownList("NhaXuatBan_Id", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.NhaXuatBan_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col mb-3">
+                @Html.LabelFor(model => model.NgayXuatBan, htmlAttributes: new { @class = "form-label " })
+                <div class="col">
+                    @Html.EditorFor(model => model.NgayXuatBan, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NgayXuatBan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col mb-3">
+                @Html.LabelFor(model => model.SoTrang, htmlAttributes: new { @class = "form-label " })
+                <div class="col">
+                    @Html.EditorFor(model => model.SoTrang, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SoTrang, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col mb-3">
+                @Html.LabelFor(model => model.GioiThieu, htmlAttributes: new { @class = "form-label " })
+                <div class="col">
+                    @Html.EditorFor(model => model.GioiThieu, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GioiThieu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col mb-3">
+                @Html.LabelFor(model => model.AnhBia, htmlAttributes: new { @class = "form-label " })
+                <div class="col">
+                    <input id="AnhBia" name="AnhBia" type="file" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col mb-3">
+                @Html.LabelFor(model => model.SoLuong, htmlAttributes: new { @class = "form-label " })
+                <div class="col">
+                    @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control", @min = "0" } })
+                    @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col"></div>
+        </div>
+
+
+        <div class="col-auto mb-3">
+            <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                Quay lại
+            </a>
+            <input type="submit" value="Lưu" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

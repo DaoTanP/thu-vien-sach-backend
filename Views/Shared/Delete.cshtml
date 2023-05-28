@@ -1,0 +1,27 @@
+﻿@model QuanLyThuVien.Models.DeleteViewModel
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xóa bản ghi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bản ghi <strong>@Html.DisplayFor(model => model.Name)</strong> sẽ bị xóa vĩnh viễn. Xác nhận xóa?</p>
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("Delete"))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>$('#deleteModal').modal('show');</script>
