@@ -133,6 +133,7 @@
     <Compile Include="App_Start\FontAwesomeBundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NguoiDungsController.cs" />
     <Compile Include="Controllers\NhaXuatBansController.cs" />
     <Compile Include="Controllers\SachesController.cs" />
     <Compile Include="Controllers\TacGiasController.cs" />
@@ -254,6 +255,11 @@
     <Content Include="Views\NhaXuatBans\Create.cshtml" />
     <Content Include="Views\NhaXuatBans\Edit.cshtml" />
     <Content Include="Views\NhaXuatBans\Index.cshtml" />
+    <Content Include="Views\NguoiDungs\Create.cshtml" />
+    <Content Include="Views\NguoiDungs\Delete.cshtml" />
+    <Content Include="Views\NguoiDungs\Details.cshtml" />
+    <Content Include="Views\NguoiDungs\Edit.cshtml" />
+    <Content Include="Views\NguoiDungs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,4 @@
-namespace QuanLyThuVien.Models
+﻿namespace QuanLyThuVien.Models
 {
     using System;
     using System.Collections.Generic;
@@ -43,6 +43,10 @@ namespace QuanLyThuVien.Models
         public string DiaChi { get; set; }
 
         public decimal? SoDienThoai { get; set; }
+
+        [Display(Name = "Ảnh đại diện")]
+        [StringLength(50)]
+        public string AnhDaiDien { get; set; }
 
         [StringLength(50)]
         public string SoThe { get; set; }
