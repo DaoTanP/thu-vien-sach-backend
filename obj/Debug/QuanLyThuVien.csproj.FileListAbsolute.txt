@@ -82,3 +82,9 @@ C:\Users\LENOVO\source\repos\QuanLyThuVien\obj\Debug\QuanLyThuVien.csproj.CopyCo
 C:\Users\LENOVO\source\repos\QuanLyThuVien\obj\Debug\QuanLyThuVien.dll
 C:\Users\LENOVO\source\repos\QuanLyThuVien\obj\Debug\QuanLyThuVien.pdb
 C:\Users\LENOVO\source\repos\QuanLyThuVien\bin\WebActivatorEx.dll
+C:\Users\LENOVO\source\repos\QuanLyThuVien\bin\System.Net.Http.Formatting.dll
+C:\Users\LENOVO\source\repos\QuanLyThuVien\bin\System.Web.Http.dll
+C:\Users\LENOVO\source\repos\QuanLyThuVien\bin\System.Web.Http.WebHost.dll
+C:\Users\LENOVO\source\repos\QuanLyThuVien\bin\System.Net.Http.Formatting.xml
+C:\Users\LENOVO\source\repos\QuanLyThuVien\bin\System.Web.Http.xml
+C:\Users\LENOVO\source\repos\QuanLyThuVien\bin\System.Web.Http.WebHost.xml

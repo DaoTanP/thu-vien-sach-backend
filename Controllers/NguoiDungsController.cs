@@ -94,7 +94,7 @@ namespace QuanLyThuVien.Controllers
             if (ModelState.IsValid)
             {
                 HttpPostedFileBase file = Request.Files["AnhDaiDien"];
-                if (file != null)
+                if (file != null && file.ContentLength > 0)
                 {
                     file.SaveAs(Server.MapPath($"~/Content/images/NguoiDung/{nguoiDung.Id}.{file.ContentType.Split('/')[1]}"));
                     nguoiDung.AnhDaiDien = $"{ nguoiDung.Id}.{ file.ContentType.Split('/')[1]}";
@@ -118,7 +118,7 @@ namespace QuanLyThuVien.Controllers
             {
                 return HttpNotFound();
             }
-            return View(nguoiDung);
+            return PartialView("~/Views/Shared/Delete.cshtml", new DeleteViewModel { Id = nguoiDung.Id, Name = nguoiDung.TenDangNhap });
         }
 
         // POST: NguoiDungs/Delete/5

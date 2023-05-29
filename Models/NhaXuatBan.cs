@@ -5,7 +5,9 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Runtime.Serialization;
 
+    [DataContract]
     [Table("NhaXuatBan")]
     public partial class NhaXuatBan
     {
@@ -15,9 +17,11 @@
             Saches = new HashSet<Sach>();
         }
 
+        [DataMember]
         [StringLength(100)]
         public string Id { get; set; }
 
+        [DataMember]
         [Display(Name = "Tên nhà xuất bản")]
         [Column("NhaXuatBan")]
         [Required]

@@ -1,0 +1,97 @@
+﻿@model IEnumerable<QuanLyThuVien.Models.ThongTinMuonSach>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thông tin mượn sách</h2>
+
+<div class="col">
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary rounded-pill me-auto mb-3" })
+</div>
+
+<div class="row">
+    <div class="col-6 d-flex align-items-center">Tổng số @Model.Count() bản ghi</div>
+
+    <form class="col" method="get" action="@Url.Action("Index")">
+        <div class="input-group mb-3 me-auto">
+            <input class="form-control" type="text" name="q" />
+            <button type="submit" class="btn btn-outline-primary">
+                <span class="fa fa-search"></span>
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NguoiMuon_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sach_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayMuon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayTra)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NguoiDung.TenDangNhap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sach.TieuDe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayMuon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayTra)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-outline-secondary">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+
+                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-outline-secondary">
+                        <i class="fa fa-info-circle"></i>
+                    </a>
+
+                    <button class="btn btn-outline-danger" onclick="getDeleteModal('@item.Id')">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div id="partial">
+
+</div>
+<script>
+    function getDeleteModal(id) {
+        var url = "@Html.Raw(Url.Action("Delete", new { id = "-parameter" }))";
+        url = url.replace("-parameter", id);
+        $.ajax({
+            url: url,
+            type: "GET",
+            cache: false,
+            success: function (result) {
+                $("#partial").html(result)
+            },
+            error: function () {
+            }
+        });
+    }
+</script>

@@ -5,11 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Thông tin chi tiết</h2>
 
 <div>
-    <h4>NguoiDung</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.TenDangNhap)
@@ -91,9 +89,20 @@
             @Html.DisplayFor(model => model.MatKhauThe)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.AnhDaiDien)
+        </dt>
+
+        <dd>
+            <img src="@($"../../Content/images/NguoiDung/{Model.AnhDaiDien}")" alt="image not found" class="img-fluid" style="max-height: 20rem" />
+        </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="col-auto mb-3">
+    <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+        Quay lại
+    </a>
+    <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-primary">
+        Chỉnh sửa
+    </a>
+</div>

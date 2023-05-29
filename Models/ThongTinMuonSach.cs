@@ -1,4 +1,4 @@
-namespace QuanLyThuVien.Models
+﻿namespace QuanLyThuVien.Models
 {
     using System;
     using System.Collections.Generic;
@@ -12,16 +12,20 @@ namespace QuanLyThuVien.Models
         [StringLength(50)]
         public string Id { get; set; }
 
+        [Display(Name = "Người mượn")]
         [Required]
         [StringLength(100)]
         public string NguoiMuon_Id { get; set; }
 
+        [Display(Name = "Sách")]
         [Required]
         [StringLength(100)]
         public string Sach_Id { get; set; }
 
+        [Display(Name = "Ngày mượn")]
         public DateTime NgayMuon { get; set; }
 
+        [Display(Name = "Ngày trả")]
         public DateTime NgayTra { get; set; }
 
         public virtual NguoiDung NguoiDung { get; set; }

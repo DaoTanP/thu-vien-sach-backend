@@ -1,0 +1,53 @@
+﻿@model QuanLyThuVien.Models.ThongTinMuonSach
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thông tin chi tiết</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NguoiMuon_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NguoiDung.TenDangNhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sach_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sach.TieuDe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayMuon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayMuon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayTra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayTra)
+        </dd>
+
+    </dl>
+</div>
+<div class="col-auto mb-3">
+    <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+        Quay lại
+    </a>
+    <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-primary">
+        Chỉnh sửa
+    </a>
+</div>
