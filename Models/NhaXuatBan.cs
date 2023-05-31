@@ -17,11 +17,11 @@
             Saches = new HashSet<Sach>();
         }
 
-        [DataMember]
+        [DataMember(Name = "id", Order = 0)]
         [StringLength(100)]
         public string Id { get; set; }
 
-        [DataMember]
+        [DataMember(Name = "publisherName", Order = 1)]
         [Display(Name = "Tên nhà xuất bản")]
         [Column("NhaXuatBan")]
         [Required]
@@ -29,6 +29,6 @@
         public string TenNhaXuatBan { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sach> Saches { get; set; }
+        public ICollection<Sach> Saches { get; set; }
     }
 }

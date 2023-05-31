@@ -28,19 +28,16 @@
         [StringLength(1000)]
         public string TieuDe { get; set; }
 
-        [DataMember(Name = "genreId")]
         [Display(Name = "Thể loại")]
         [Required]
         [StringLength(100)]
         public string TheLoai_Id { get; set; }
 
-        [DataMember(Name = "authorId")]
         [Display(Name = "Tác giả")]
         [Required]
         [StringLength(100)]
         public string TacGia_Id { get; set; }
 
-        [DataMember(Name = "publisherId")]
         [Display(Name = "Nhà xuất bản")]
         [Required]
         [StringLength(100)]
@@ -48,7 +45,9 @@
 
         [DataMember(Name = "publishDate", Order = 3)]
         [Display(Name = "Ngày xuất bản")]
-        public short? NgayXuatBan { get; set; }
+        [DataType(DataType.Date)]
+        [Column(TypeName = "Date")]
+        public DateTime? NgayXuatBan { get; set; }
 
         [DataMember(Name = "numberOfPage", Order = 4)]
         [Display(Name = "Số trang")]
@@ -64,17 +63,20 @@
         [StringLength(50)]
         public string AnhBia { get; set; }
 
-        [DataMember]
+        [DataMember(Name = "inStock", Order = 10)]
         [Display(Name = "Số lượng")]
         public int SoLuong { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public ICollection<DanhSachYeuThich> DanhSachYeuThiches { get; set; }
 
+        [DataMember(Name = "publisher")]
         public NhaXuatBan NhaXuatBan { get; set; }
 
+        [DataMember(Name = "author")]
         public TacGia TacGia { get; set; }
 
+        [DataMember(Name = "category")]
         public TheLoai TheLoai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

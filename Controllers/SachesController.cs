@@ -142,7 +142,9 @@ namespace QuanLyThuVien.Controllers
             Sach sach = db.Saches.Find(id);
             db.Saches.Remove(sach);
             db.SaveChanges();
-            System.IO.File.Delete(Server.MapPath($"~/Content/images/Sach/{sach.AnhBia}"));
+            string imagePath = Server.MapPath($"~/Content/images/Sach/{sach.AnhBia}");
+            if (System.IO.File.Exists(imagePath))
+                System.IO.File.Delete(imagePath);
             return RedirectToAction("Index");
         }
 

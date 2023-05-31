@@ -50,7 +50,7 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TenDangNhap,MatKhau,HoDem,Ten,NgaySinh,GioiTinh,DiaChi,SoDienThoai,AnhDaiDien,SoThe,MatKhauThe")] NguoiDung nguoiDung)
+        public ActionResult Create([Bind(Include = "Id,TenDangNhap,MatKhau,HoDem,Ten,NgaySinh,GioiTinh,DiaChi,Email,SoDienThoai,AnhDaiDien,SoThe,MatKhauThe")] NguoiDung nguoiDung)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TenDangNhap,MatKhau,HoDem,Ten,NgaySinh,GioiTinh,DiaChi,SoDienThoai,AnhDaiDien,SoThe,MatKhauThe")] NguoiDung nguoiDung)
+        public ActionResult Edit([Bind(Include = "Id,TenDangNhap,MatKhau,HoDem,Ten,NgaySinh,GioiTinh,DiaChi,Email,SoDienThoai,AnhDaiDien,SoThe,MatKhauThe")] NguoiDung nguoiDung)
         {
             if (ModelState.IsValid)
             {
@@ -129,7 +129,9 @@ namespace QuanLyThuVien.Controllers
             NguoiDung nguoiDung = db.NguoiDungs.Find(id);
             db.NguoiDungs.Remove(nguoiDung);
             db.SaveChanges();
-            System.IO.File.Delete(Server.MapPath($"~/Content/images/NguoiDung/{nguoiDung.AnhDaiDien}"));
+            string imagePath = Server.MapPath($"~/Content/images/NguoiDung/{nguoiDung.AnhDaiDien}");
+            if (System.IO.File.Exists(imagePath))
+            System.IO.File.Delete(imagePath);
             return RedirectToAction("Index");
         }
 

@@ -17,29 +17,21 @@ namespace QuanLyThuVien.Controllers
         // GET: DanhSachYeuThiches
         public ActionResult Index()
         {
-            var danhSachYeuThiches = db.DanhSachYeuThiches.Include(d => d.NguoiDung).Include(d => d.Sach);
-            return View(danhSachYeuThiches.ToList());
-        }
+            string query = Request.QueryString["q"];
+            if (query == null)
+                query = "";
 
-        // GET: DanhSachYeuThiches/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DanhSachYeuThich danhSachYeuThich = db.DanhSachYeuThiches.Find(id);
-            if (danhSachYeuThich == null)
-            {
-                return HttpNotFound();
-            }
-            return View(danhSachYeuThich);
+            var danhSachYeuThiches = db.DanhSachYeuThiches
+                .Include(d => d.NguoiDung)
+                .Include(d => d.Sach)
+                .Where(d => d.NguoiDung.HoDem.Contains(query) || d.NguoiDung.Ten.Contains(query) || d.Sach.TieuDe.Contains(query));
+            return View(danhSachYeuThiches.ToList());
         }
 
         // GET: DanhSachYeuThiches/Create
         public ActionResult Create()
         {
-            ViewBag.NguoiDung_Id = new SelectList(db.NguoiDungs, "Id", "TenDangNhap");
+            ViewBag.NguoiDung_Id = new SelectList(db.NguoiDungs, "Id", "HoTen");
             ViewBag.Sach_Id = new SelectList(db.Saches, "Id", "TieuDe");
             return View();
         }
@@ -49,10 +41,11 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NguoiDung_Id,Sach_Id")] DanhSachYeuThich danhSachYeuThich)
+        public ActionResult Create([Bind(Include = "NguoiDung_Id,Sach_Id")] DanhSachYeuThich danhSachYeuThich)
         {
             if (ModelState.IsValid)
             {
+                danhSachYeuThich.Id = Guid.NewGuid().ToString("n");
                 db.DanhSachYeuThiches.Add(danhSachYeuThich);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -110,7 +103,7 @@ namespace QuanLyThuVien.Controllers
             {
                 return HttpNotFound();
             }
-            return View(danhSachYeuThich);
+            return PartialView("~/Views/Shared/Delete.cshtml", new DeleteViewModel { Id = danhSachYeuThich.Id, Name = "" });
         }
 
         // POST: DanhSachYeuThiches/Delete/5

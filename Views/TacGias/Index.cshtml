@@ -24,39 +24,41 @@
     </form>
 </div>
 
-<table class="table table-striped table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.HoDem)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ten)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.HoDem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ten)
-            </td>
-            <td>
-                <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-outline-secondary">
-                    <i class="fa fa-pencil"></i>
-                </a>
-
-                <button class="btn btn-outline-danger" onclick="getDeleteModal('@item.Id')">
-                    <i class="fa fa-trash"></i>
-                </button>
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.HoDem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ten)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoDem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ten)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-outline-secondary">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+
+                    <button class="btn btn-outline-danger" onclick="getDeleteModal('@item.Id')">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
 
 <div id="partial">
 

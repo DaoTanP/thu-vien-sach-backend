@@ -48,8 +48,16 @@ namespace QuanLyThuVien.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<NguoiDung>()
+                .Property(e => e.Email)
+                .IsUnicode(false);
+            
+            modelBuilder.Entity<NguoiDung>()
                 .Property(e => e.SoDienThoai)
-                .HasPrecision(18, 0);
+                .IsUnicode(false);
+            
+            modelBuilder.Entity<NguoiDung>()
+                .Property(e => e.AnhDaiDien)
+                .IsUnicode(false);
 
             modelBuilder.Entity<NguoiDung>()
                 .Property(e => e.SoThe)
