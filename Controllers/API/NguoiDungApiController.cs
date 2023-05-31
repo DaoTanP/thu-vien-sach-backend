@@ -144,16 +144,20 @@ namespace QuanLyThuVien.Controllers
         [HttpPost]
         public IHttpActionResult Login([FromBody]AccountViewModel account)
         {
-            var searchingUser = db.NguoiDungs
+            var ketQua = db.NguoiDungs
                                 .Where(u => u.TenDangNhap == account.username)
                                 .Where(u => u.MatKhau == account.password);
 
-            if(searchingUser.Count() == 0)
+            if(ketQua.Count() == 0)
             {
                 return NotFound();
             }
 
-            return StatusCode(HttpStatusCode.OK);
+            NguoiDung nguoiDung = ketQua.First();
+            nguoiDung.MatKhau = null;
+            nguoiDung.AnhDaiDien = Url.Content("~/") + "Content/images/NguoiDung/" + nguoiDung.AnhDaiDien;
+
+            return Ok(nguoiDung);
         }
         
         [Route("api/user/usernameExists")]

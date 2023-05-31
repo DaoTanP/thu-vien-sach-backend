@@ -56,7 +56,7 @@ namespace QuanLyThuVien.Controllers
             {
                 nguoiDung.Id = Guid.NewGuid().ToString("n");
                 HttpPostedFileBase file = Request.Files["AnhDaiDien"];
-                if (file != null)
+                if (file != null && file.ContentLength > 0)
                 {
                     file.SaveAs(Server.MapPath($"~/Content/images/NguoiDung/{nguoiDung.Id}.{file.ContentType.Split('/')[1]}"));
                     nguoiDung.AnhDaiDien = $"{ nguoiDung.Id}.{ file.ContentType.Split('/')[1]}";
