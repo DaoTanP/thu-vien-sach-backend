@@ -18,6 +18,25 @@
             ThongTinMuonSaches = new HashSet<ThongTinMuonSach>();
         }
 
+        public Sach(Sach s)
+        {
+            Id = s.Id;
+            TieuDe = s.TieuDe;
+            TheLoai_Id = s.TheLoai_Id;
+            TheLoai = s.TheLoai;
+            TacGia_Id = s.TacGia_Id;
+            TacGia = s.TacGia;
+            NhaXuatBan_Id = s.NhaXuatBan_Id;
+            NhaXuatBan = s.NhaXuatBan;
+            NgayXuatBan = s.NgayXuatBan;
+            SoTrang = s.SoTrang;
+            GioiThieu = s.GioiThieu;
+            AnhBia = s.AnhBia;
+            SoLuong = s.SoLuong;
+            DanhSachYeuThiches = s.DanhSachYeuThiches;
+            ThongTinMuonSaches = s.ThongTinMuonSaches;
+        }
+
         [DataMember(Name = "id", Order = 1)]
         [StringLength(100)]
         public string Id { get; set; }
@@ -49,7 +68,7 @@
         [Column(TypeName = "Date")]
         public DateTime? NgayXuatBan { get; set; }
 
-        [DataMember(Name = "numberOfPage", Order = 4)]
+        [DataMember(Name = "numberOfPages", Order = 4)]
         [Display(Name = "Số trang")]
         public short? SoTrang { get; set; }
 

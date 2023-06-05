@@ -5,10 +5,9 @@ using System.Web;
 
 namespace QuanLyThuVien.Controllers
 {
-    public class AccountViewModel
+    public class AvatarUploadViewModel
     {
-        public string displayName { get; set; }
         public string username { get; set; }
-        public string password { get; set; }
+        public byte[] imageBytes { get; set; }
     }
 }

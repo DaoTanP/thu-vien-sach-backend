@@ -148,7 +148,7 @@
     <Compile Include="App_Start\FontAwesomeBundleConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Models\AccountViewModel.cs" />
+    <Compile Include="Models\AvatarUploadViewModel.cs" />
     <Compile Include="Controllers\DanhSachYeuThichesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\API\NguoiDungApiController.cs" />
@@ -172,6 +172,7 @@
     <Compile Include="Models\TheLoai.cs" />
     <Compile Include="Models\ThongTinMuonSach.cs" />
     <Compile Include="Models\ThuVien.cs" />
+    <Compile Include="Models\UserPasswordChangeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

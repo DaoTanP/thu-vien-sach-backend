@@ -44,7 +44,7 @@ namespace QuanLyThuVien.Controllers
         public ActionResult Create()
         {
             ViewBag.NhaXuatBan_Id = new SelectList(db.NhaXuatBans, "Id", "TenNhaXuatBan");
-            ViewBag.TacGia_Id = new SelectList(db.TacGias, "Id", "HoTen");
+            ViewBag.TacGia_Id = new SelectList(db.TacGias, "Id", "Ten");
             ViewBag.TheLoai_Id = new SelectList(db.TheLoais, "Id", "TenTheLoai");
             return View();
         }
@@ -71,7 +71,7 @@ namespace QuanLyThuVien.Controllers
             }
 
             ViewBag.NhaXuatBan_Id = new SelectList(db.NhaXuatBans, "Id", "TenNhaXuatBan", sach.NhaXuatBan_Id);
-            ViewBag.TacGia_Id = new SelectList(db.TacGias, "Id", "HoDem", sach.TacGia_Id);
+            ViewBag.TacGia_Id = new SelectList(db.TacGias, "Id", "Ten", sach.TacGia_Id);
             ViewBag.TheLoai_Id = new SelectList(db.TheLoais, "Id", "TenTheLoai", sach.TheLoai_Id);
             return View(sach);
         }
@@ -89,7 +89,7 @@ namespace QuanLyThuVien.Controllers
                 return HttpNotFound();
             }
             ViewBag.NhaXuatBan_Id = new SelectList(db.NhaXuatBans, "Id", "TenNhaXuatBan", sach.NhaXuatBan_Id);
-            ViewBag.TacGia_Id = new SelectList(db.TacGias, "Id", "HoDem", sach.TacGia_Id);
+            ViewBag.TacGia_Id = new SelectList(db.TacGias, "Id", "Ten", sach.TacGia_Id);
             ViewBag.TheLoai_Id = new SelectList(db.TheLoais, "Id", "TenTheLoai", sach.TheLoai_Id);
             return View(sach);
         }
@@ -114,7 +114,7 @@ namespace QuanLyThuVien.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.NhaXuatBan_Id = new SelectList(db.NhaXuatBans, "Id", "TenNhaXuatBan", sach.NhaXuatBan_Id);
-            ViewBag.TacGia_Id = new SelectList(db.TacGias, "Id", "HoTen", sach.TacGia_Id);
+            ViewBag.TacGia_Id = new SelectList(db.TacGias, "Id", "Ten", sach.TacGia_Id);
             ViewBag.TheLoai_Id = new SelectList(db.TheLoais, "Id", "TenTheLoai", sach.TheLoai_Id);
             return View(sach);
         }

@@ -27,6 +27,7 @@ namespace QuanLyThuVien
             formatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
             formatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
             // formatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            formatter.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
             config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }

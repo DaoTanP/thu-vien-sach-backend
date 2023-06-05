@@ -21,21 +21,10 @@
         [StringLength(100)]
         public string Id { get; set; }
 
-        [DataMember(Name = "lastName", Order = 1)]
-        [Display(Name = "Họ đệm")]
-        [StringLength(50)]
-        public string HoDem { get; set; }
-
-        [DataMember(Name = "firstName", Order = 2)]
+        [DataMember(Name = "name", Order = 1)]
         [Display(Name = "Tên")]
-        [Required]
         [StringLength(50)]
         public string Ten { get; set; }
-
-        [Display(Name = "Họ Tên")]
-        public string HoTen { 
-            get => HoDem + " " + Ten; 
-        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public ICollection<Sach> Saches { get; set; }

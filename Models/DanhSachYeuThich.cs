@@ -1,4 +1,4 @@
-namespace QuanLyThuVien.Models
+﻿namespace QuanLyThuVien.Models
 {
     using System;
     using System.Collections.Generic;
@@ -14,17 +14,20 @@ namespace QuanLyThuVien.Models
         [StringLength(100)]
         public string Id { get; set; }
 
+        [Display(Name = "Người dùng")]
         [Required]
         [StringLength(100)]
         public string NguoiDung_Id { get; set; }
 
-        [DataMember(Name = "bookId", Order = 1)]
+        [Display(Name = "Sách")]
         [Required]
         [StringLength(100)]
         public string Sach_Id { get; set; }
 
         public NguoiDung NguoiDung { get; set; }
 
+    [DataMember(Name = "book")]
         public Sach Sach { get; set; }
+
     }
 }

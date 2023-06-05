@@ -16,8 +16,8 @@ namespace QuanLyThuVien.Controllers
     {
         private ThuVien db = new ThuVien();
 
-        // GET: api/sach
-        [Route("api/sach")]
+        // GET: api/book
+        [Route("api/book")]
         public IHttpActionResult GetSaches()
         {
             var data = db.Saches
@@ -29,12 +29,13 @@ namespace QuanLyThuVien.Controllers
             return Ok(data);
         }
 
-        // GET: api/sach/5ohwf4oh09f
-        [Route("api/sach/{id}")]
+        // GET: api/book/5ohwf4oh09f
+        [Route("api/book/{id}")]
         [ResponseType(typeof(Sach))]
         public IHttpActionResult GetSach(string id)
         {
-            Sach sach = db.Saches.Include(s => s.TheLoai)
+            Sach sach = db.Saches
+                .Include(s => s.TheLoai)
                 .Include(s => s.TacGia)
                 .Include(s => s.NhaXuatBan)
                 .ToList()

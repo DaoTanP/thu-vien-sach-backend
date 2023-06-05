@@ -21,7 +21,7 @@
         [StringLength(100)]
         public string Id { get; set; }
 
-        [DataMember(Name = "CategoryName", Order = 1)]
+        [DataMember(Name = "name", Order = 1)]
         [Display(Name = "Tên thể loại")]
         [Column("TheLoai")]
         [Required]

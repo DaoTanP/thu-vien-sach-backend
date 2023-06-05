@@ -21,7 +21,7 @@
         [StringLength(100)]
         public string Id { get; set; }
 
-        [DataMember(Name = "publisherName", Order = 1)]
+        [DataMember(Name = "name", Order = 1)]
         [Display(Name = "Tên nhà xuất bản")]
         [Column("NhaXuatBan")]
         [Required]

@@ -23,13 +23,17 @@
         public string Sach_Id { get; set; }
 
         [Display(Name = "Ngày mượn")]
+        [DataType(DataType.Date)]
+        [Column(TypeName = "Date")]
         public DateTime NgayMuon { get; set; }
 
         [Display(Name = "Ngày trả")]
+        [DataType(DataType.Date)]
+        [Column(TypeName = "Date")]
         public DateTime NgayTra { get; set; }
 
-        public virtual NguoiDung NguoiDung { get; set; }
+        public NguoiDung NguoiDung { get; set; }
 
-        public virtual Sach Sach { get; set; }
+        public Sach Sach { get; set; }
     }
 }

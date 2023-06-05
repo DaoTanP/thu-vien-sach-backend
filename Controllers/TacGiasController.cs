@@ -22,7 +22,7 @@ namespace QuanLyThuVien.Controllers
                 query = "";
 
             return View("Index", db.TacGias.Where(tacgia => 
-                tacgia.HoDem.Contains(query) || tacgia.Ten.Contains(query)
+                tacgia.Ten.Contains(query) || tacgia.Ten.Contains(query)
                 ).ToList());
         }
 
@@ -93,7 +93,7 @@ namespace QuanLyThuVien.Controllers
             {
                 return HttpNotFound();
             }
-            return PartialView("~/Views/Shared/Delete.cshtml", new DeleteViewModel { Id = tacGia.Id, Name = tacGia.HoTen });
+            return PartialView("~/Views/Shared/Delete.cshtml", new DeleteViewModel { Id = tacGia.Id, Name = tacGia.Ten });
         }
 
         // POST: TacGias/Delete/5

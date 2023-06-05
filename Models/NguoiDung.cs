@@ -50,7 +50,8 @@
 
         [DataMember(Name = "dateOfBirth", Order = 6)]
         [Display(Name = "Ngày sinh")]
-        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
+        [Column(TypeName = "Date")]
         public DateTime? NgaySinh { get; set; }
 
         [DataMember(Name = "gender", Order = 7)]
