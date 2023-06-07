@@ -338,7 +338,7 @@ namespace QuanLyThuVien.Controllers
         
         private IQueryable<NguoiDung> Validate(string tenDangNhap, string matKhau)
         {
-            var nguoiDung = db.NguoiDungs.Where(u => u.TenDangNhap == tenDangNhap).Where(u => u.MatKhau == matKhau);
+            var nguoiDung = db.NguoiDungs.AsNoTracking().Where(u => u.TenDangNhap == tenDangNhap).Where(u => u.MatKhau == matKhau);
 
             if (nguoiDung.Count() == 0)
                 return null;

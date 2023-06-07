@@ -32,7 +32,7 @@ namespace QuanLyThuVien.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sach sach = db.Saches.Find(id);
+            Sach sach = db.Saches.Include(s => s.NhaXuatBan).Include(s => s.TacGia).Include(s => s.TheLoai).Where(s => s.Id == id).First();
             if (sach == null)
             {
                 return HttpNotFound();

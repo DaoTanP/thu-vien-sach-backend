@@ -162,6 +162,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BookQueryViewModel.cs" />
     <Compile Include="Models\DanhSachYeuThich.cs" />
     <Compile Include="Models\DeleteViewModel.cs" />
     <Compile Include="Models\NguoiDung.cs" />
