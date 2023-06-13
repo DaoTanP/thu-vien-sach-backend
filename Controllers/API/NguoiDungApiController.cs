@@ -48,24 +48,15 @@ namespace QuanLyThuVien.Controllers
         [ResponseType(typeof(NguoiDung))]
         public IHttpActionResult GetNguoiDung(string id)
         {
-            NguoiDung nguoiDung = db.NguoiDungs
-                .Include(u => u.DanhSachYeuThiches.Select(d => d.Sach))
-                .Include(u => u.DanhSachYeuThiches.Select(d => d.Sach.TheLoai))
-                .Include(u => u.DanhSachYeuThiches.Select(d => d.Sach.TacGia))
-                .Include(u => u.DanhSachYeuThiches.Select(d => d.Sach.NhaXuatBan))
-                .ToList()
-                .Find(u => u.Id == id);
+            NguoiDung nguoiDung = db.NguoiDungs.Find(id);
             if (nguoiDung == null)
             {
                 return NotFound();
             }
 
             nguoiDung.AnhDaiDien = Url.Content("~/") + "Content/images/NguoiDung/" + nguoiDung.AnhDaiDien;
-            nguoiDung.DanhSachYeuThiches.All(d =>
-            {
-                d.Sach.AnhBia = Url.Content("~/") + "Content/images/Sach/" + d.Sach.AnhBia;
-                return true;
-            });
+
+            nguoiDung.MatKhau = null;
 
             return Ok(nguoiDung);
         }
@@ -102,11 +93,6 @@ namespace QuanLyThuVien.Controllers
 
             n.MatKhau = null;
             n.AnhDaiDien = Url.Content("~/") + "Content/images/NguoiDung/" + n.AnhDaiDien;
-            n.DanhSachYeuThiches.All(d =>
-            {
-                d.Sach.AnhBia = Url.Content("~/") + "Content/images/Sach/" + d.Sach.AnhBia;
-                return true;
-            });
 
             return Ok(n);
         }
@@ -265,27 +251,16 @@ namespace QuanLyThuVien.Controllers
                 return NotFound();
             }
 
-            ketQua = ketQua
-                    .Include(u => u.DanhSachYeuThiches.Select(d => d.Sach))
-                    .Include(u => u.DanhSachYeuThiches.Select(d => d.Sach.TheLoai))
-                    .Include(u => u.DanhSachYeuThiches.Select(d => d.Sach.TacGia))
-                    .Include(u => u.DanhSachYeuThiches.Select(d => d.Sach.NhaXuatBan));
-
             NguoiDung nguoiDung = ketQua.First();
             nguoiDung.MatKhau = null;
             nguoiDung.AnhDaiDien = Url.Content("~/") + "Content/images/NguoiDung/" + nguoiDung.AnhDaiDien;
-            nguoiDung.DanhSachYeuThiches.All(d =>
-            {
-                d.Sach.AnhBia = Url.Content("~/") + "Content/images/Sach/" + d.Sach.AnhBia;
-                return true;
-            });
 
             return Ok(nguoiDung);
         }
         
         [Route("api/user/usernameExists")]
         [HttpPost]
-        public bool UsernameExists([FromBody]NguoiDung n)
+        public bool UsernameExists(NguoiDung n)
         {
             if (n != null && NguoiDungExists(n.TenDangNhap))
             {
@@ -295,31 +270,77 @@ namespace QuanLyThuVien.Controllers
             return false;
         }
         
-        [Route("api/user/favoriteBooks")]
-        [HttpPost]
-        public IHttpActionResult GetFavoriteBooks([FromBody]NguoiDung n)
+        [Route("api/user/{id}/favorite")]
+        [HttpGet]
+        public IHttpActionResult GetFavoriteBooks(string id)
         {
-            if (n != null || !NguoiDungExists(n.TenDangNhap))
-                return StatusCode(HttpStatusCode.BadRequest);
-
-            var nguoiDung = Validate(n.TenDangNhap, n.MatKhau);
-
-            if (nguoiDung.Count() == 0)
-                return StatusCode(HttpStatusCode.Forbidden);
-
-            nguoiDung = nguoiDung.Include(u => u.DanhSachYeuThiches.Select(d => d.Sach))
-                    .Include(u => u.DanhSachYeuThiches.Select(d => d.Sach.TheLoai))
-                    .Include(u => u.DanhSachYeuThiches.Select(d => d.Sach.TacGia))
-                    .Include(u => u.DanhSachYeuThiches.Select(d => d.Sach.NhaXuatBan));
-
-            var favoriteBooks = nguoiDung.First().DanhSachYeuThiches;
-            favoriteBooks.All(d =>
-            {
-                d.Sach.AnhBia = Url.Content("~/") + "Content/images/Sach/" + d.Sach.AnhBia;
-                return true;
-            });
+            var favoriteBooks = FavoriteBooks(id);
 
             return Ok(favoriteBooks);
+        }
+
+        [Route("api/user/addFavorite")]
+        [HttpPost]
+        public IHttpActionResult AddFavoriteBook(DanhSachYeuThich favorite)
+        {
+            if (favorite == null || db.NguoiDungs.Find(favorite.NguoiDung_Id) == null || db.Saches.Find(favorite.Sach_Id) == null)
+                return StatusCode(HttpStatusCode.BadRequest);
+
+            favorite.Id = Guid.NewGuid().ToString("n");
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.DanhSachYeuThiches.Add(favorite);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                return Conflict();
+                throw;
+            }
+
+            return Ok();
+        }
+        
+        [Route("api/user/removeFavorite")]
+        [HttpPost]
+        public IHttpActionResult RemoveFavoriteBook(DanhSachYeuThich favorite)
+        {
+            if (favorite == null || db.NguoiDungs.Find(favorite.NguoiDung_Id) == null || db.Saches.Find(favorite.Sach_Id) == null)
+                return StatusCode(HttpStatusCode.BadRequest);
+
+            var ds = db.DanhSachYeuThiches.Where(y => y.NguoiDung_Id == favorite.NguoiDung_Id && y.Sach_Id == favorite.Sach_Id);
+
+            if(ds == null || ds.Count() == 0)
+                return StatusCode(HttpStatusCode.BadRequest);
+
+            DanhSachYeuThich yeuThich = ds.First();
+
+            db.DanhSachYeuThiches.Remove(yeuThich);
+            db.SaveChanges();
+
+            return Ok();
+        }
+        
+        [Route("api/user/isFavorite")]
+        [HttpPost]
+        public IHttpActionResult IsFavorite(DanhSachYeuThich favorite)
+        {
+            if (favorite == null || db.NguoiDungs.Find(favorite.NguoiDung_Id) == null || db.Saches.Find(favorite.Sach_Id) == null)
+                return StatusCode(HttpStatusCode.BadRequest);
+
+            var ds = db.DanhSachYeuThiches.Where(y => y.NguoiDung_Id == favorite.NguoiDung_Id && y.Sach_Id == favorite.Sach_Id);
+
+            if(ds == null || ds.Count() == 0)
+                return Ok(false);
+
+            return Ok(true);
         }
 
         protected override void Dispose(bool disposing)
@@ -329,6 +350,34 @@ namespace QuanLyThuVien.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private ICollection<Sach> FavoriteBooks(string userId)
+        {
+            var bookId = db.NguoiDungs.Where(u => u.Id == userId).Select(u => u.DanhSachYeuThiches).First().Select(u => u.Sach_Id);
+
+            if (bookId == null || bookId.Count() == 0)
+                return null;
+
+            var favoriteBooks = db.Saches
+                .Include(s => s.TheLoai)
+                .Include(s => s.TacGia)
+                .Include(s => s.NhaXuatBan)
+                .ToList()
+                .Where(s => bookId.Any(b => b.IndexOf(s.Id) > -1));
+
+            if (favoriteBooks == null)
+            {
+                return null;
+            }
+
+            favoriteBooks.All(d =>
+            {
+                d.AnhBia = Url.Content("~/") + "Content/images/Sach/" + d.AnhBia;
+                return true;
+            });
+
+            return favoriteBooks.ToList();
         }
 
         private bool NguoiDungExists(string tenDangNhap)

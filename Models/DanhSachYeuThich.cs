@@ -14,11 +14,13 @@
         [StringLength(100)]
         public string Id { get; set; }
 
+        [DataMember(Name = "userId")]
         [Display(Name = "Người dùng")]
         [Required]
         [StringLength(100)]
         public string NguoiDung_Id { get; set; }
 
+        [DataMember(Name = "bookId")]
         [Display(Name = "Sách")]
         [Required]
         [StringLength(100)]
@@ -26,7 +28,6 @@
 
         public NguoiDung NguoiDung { get; set; }
 
-    [DataMember(Name = "book")]
         public Sach Sach { get; set; }
 
     }

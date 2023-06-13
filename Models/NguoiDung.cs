@@ -86,7 +86,6 @@
         [StringLength(50)]
         public string MatKhauThe { get; set; }
 
-        [DataMember(Name = "favoriteBooks", Order = 13)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public ICollection<DanhSachYeuThich> DanhSachYeuThiches { get; set; }
 
