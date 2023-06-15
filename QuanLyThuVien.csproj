@@ -148,6 +148,8 @@
     <Compile Include="App_Start\FontAwesomeBundleConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\TheThuViensController.cs" />
+    <Compile Include="Controllers\TrangThaiMuonSachesController.cs" />
     <Compile Include="Models\AvatarUploadViewModel.cs" />
     <Compile Include="Controllers\DanhSachYeuThichesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -168,12 +170,13 @@
     <Compile Include="Models\NguoiDung.cs" />
     <Compile Include="Models\NhaXuatBan.cs" />
     <Compile Include="Models\Sach.cs" />
-    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\TacGia.cs" />
     <Compile Include="Models\TheLoai.cs" />
     <Compile Include="Models\ThongTinMuonSach.cs" />
     <Compile Include="Models\ThuVien.cs" />
     <Compile Include="Models\UserPasswordChangeViewModel.cs" />
+    <Compile Include="Models\TheThuVien.cs" />
+    <Compile Include="Models\TrangThaiMuonSach.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +201,8 @@
     <Content Include="Content\fontawesome\font-awesome.css" />
     <Content Include="Content\fontawesome\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\simple-datatables.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
@@ -249,7 +254,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\simple-datatables.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -289,6 +296,16 @@
     <Content Include="Views\DanhSachYeuThiches\Create.cshtml" />
     <Content Include="Views\DanhSachYeuThiches\Edit.cshtml" />
     <Content Include="Views\DanhSachYeuThiches\Index.cshtml" />
+    <Content Include="Views\TheThuViens\Create.cshtml" />
+    <Content Include="Views\TheThuViens\Delete.cshtml" />
+    <Content Include="Views\TheThuViens\Details.cshtml" />
+    <Content Include="Views\TheThuViens\Edit.cshtml" />
+    <Content Include="Views\TheThuViens\Index.cshtml" />
+    <Content Include="Views\TrangThaiMuonSaches\Create.cshtml" />
+    <Content Include="Views\TrangThaiMuonSaches\Delete.cshtml" />
+    <Content Include="Views\TrangThaiMuonSaches\Details.cshtml" />
+    <Content Include="Views\TrangThaiMuonSaches\Edit.cshtml" />
+    <Content Include="Views\TrangThaiMuonSaches\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

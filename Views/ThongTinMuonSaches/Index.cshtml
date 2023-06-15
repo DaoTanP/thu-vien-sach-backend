@@ -28,7 +28,7 @@
     <table class="table table-striped table-hover">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NguoiMuon_Id)
+                @Html.DisplayNameFor(model => model.SoThe)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Sach_Id)
@@ -39,6 +39,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.NgayTra)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrangThaiMuon_Id)
+            </th>
             <th></th>
         </tr>
 
@@ -46,7 +49,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NguoiDung.TenDangNhap)
+                    @Html.DisplayFor(modelItem => item.TheThuVien.SoThe)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Sach.TieuDe)
@@ -56,6 +59,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NgayTra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrangThaiMuonSach.TrangThaiMuon)
                 </td>
                 <td>
                     <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-outline-secondary">

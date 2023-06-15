@@ -21,8 +21,12 @@ namespace QuanLyThuVien.Controllers
             if (query == null)
                 query = "";
 
-            var saches = db.Saches.Where(s => s.TieuDe.Contains(query)).Include(s => s.NhaXuatBan).Include(s => s.TacGia).Include(s => s.TheLoai);
-            return View(saches.ToList());
+            var saches = db.Saches.Where(s => s.TieuDe.Contains(query))
+                                .Include(s => s.NhaXuatBan)
+                                .Include(s => s.TacGia)
+                                .Include(s => s.TheLoai)
+                                .ToList();
+            return View(saches);
         }
 
         // GET: Saches/Details/5
@@ -60,7 +64,7 @@ namespace QuanLyThuVien.Controllers
             {
                 sach.Id = Guid.NewGuid().ToString("n");
                 HttpPostedFileBase file = Request.Files["AnhBia"];
-                if(file != null)
+                if(file != null && file.ContentLength > 0)
                 {
                     file.SaveAs(Server.MapPath($"~/Content/images/Sach/{sach.Id}.{file.ContentType.Split('/')[1]}"));
                     sach.AnhBia = $"{ sach.Id}.{ file.ContentType.Split('/')[1]}";
@@ -104,7 +108,7 @@ namespace QuanLyThuVien.Controllers
             if (ModelState.IsValid)
             {
                 HttpPostedFileBase file = Request.Files["AnhBia"];
-                if (file != null)
+                if (file != null && file.ContentLength > 0)
                 {
                     file.SaveAs(Server.MapPath($"~/Content/images/Sach/{sach.Id}.{file.ContentType.Split('/')[1]}"));
                     sach.AnhBia = $"{ sach.Id}.{ file.ContentType.Split('/')[1]}";

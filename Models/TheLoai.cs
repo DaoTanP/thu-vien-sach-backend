@@ -23,7 +23,6 @@
 
         [DataMember(Name = "name", Order = 1)]
         [Display(Name = "Tên thể loại")]
-        [Column("TheLoai")]
         [Required]
         [StringLength(200)]
         public string TenTheLoai { get; set; }

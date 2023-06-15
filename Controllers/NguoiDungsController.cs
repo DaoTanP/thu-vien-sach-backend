@@ -17,11 +17,9 @@ namespace QuanLyThuVien.Controllers
         // GET: NguoiDungs
         public ActionResult Index()
         {
-            string query = Request.QueryString["q"];
-            if (query == null)
-                query = "";
+            var nguoiDungs = db.NguoiDungs.Include(u => u.TheThuVien).ToList();
 
-            return View(db.NguoiDungs.Where(u => u.HoDem.Contains(query) || u.Ten.Contains(query)).ToList());
+            return View(nguoiDungs);
         }
 
         // GET: NguoiDungs/Details/5
@@ -31,7 +29,7 @@ namespace QuanLyThuVien.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NguoiDung nguoiDung = db.NguoiDungs.Find(id);
+            NguoiDung nguoiDung = db.NguoiDungs.Include(u => u.TheThuVien).Where(u => u.Id == id).First();
             if (nguoiDung == null)
             {
                 return HttpNotFound();
@@ -42,6 +40,7 @@ namespace QuanLyThuVien.Controllers
         // GET: NguoiDungs/Create
         public ActionResult Create()
         {
+            ViewBag.SoThe = new SelectList(db.TheThuViens, "SoThe", "SoThe");
             return View();
         }
 
@@ -50,7 +49,7 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TenDangNhap,MatKhau,HoDem,Ten,NgaySinh,GioiTinh,DiaChi,Email,SoDienThoai,AnhDaiDien,SoThe,MatKhauThe")] NguoiDung nguoiDung)
+        public ActionResult Create([Bind(Include = "Id,TenDangNhap,MatKhau,HoDem,Ten,NgaySinh,GioiTinh,DiaChi,Email,SoDienThoai,AnhDaiDien,SoThe")] NguoiDung nguoiDung)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +65,7 @@ namespace QuanLyThuVien.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.SoThe = new SelectList(db.TheThuViens, "SoThe", "SoThe", nguoiDung.SoThe);
             return View(nguoiDung);
         }
 
@@ -81,6 +81,8 @@ namespace QuanLyThuVien.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.SoThe = new SelectList(db.TheThuViens, "SoThe", "SoThe", nguoiDung.SoThe);
             return View(nguoiDung);
         }
 
@@ -89,7 +91,7 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TenDangNhap,MatKhau,HoDem,Ten,NgaySinh,GioiTinh,DiaChi,Email,SoDienThoai,AnhDaiDien,SoThe,MatKhauThe")] NguoiDung nguoiDung)
+        public ActionResult Edit([Bind(Include = "Id,TenDangNhap,MatKhau,HoDem,Ten,NgaySinh,GioiTinh,DiaChi,Email,SoDienThoai,AnhDaiDien,SoThe")] NguoiDung nguoiDung)
         {
             if (ModelState.IsValid)
             {
@@ -103,6 +105,8 @@ namespace QuanLyThuVien.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.SoThe = new SelectList(db.TheThuViens, "SoThe", "SoThe", nguoiDung.SoThe);
             return View(nguoiDung);
         }
 
@@ -131,7 +135,7 @@ namespace QuanLyThuVien.Controllers
             db.SaveChanges();
             string imagePath = Server.MapPath($"~/Content/images/NguoiDung/{nguoiDung.AnhDaiDien}");
             if (System.IO.File.Exists(imagePath))
-            System.IO.File.Delete(imagePath);
+                System.IO.File.Delete(imagePath);
             return RedirectToAction("Index");
         }
 

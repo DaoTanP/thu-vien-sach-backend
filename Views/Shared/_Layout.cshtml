@@ -3,73 +3,167 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Thư viện đại học Quy Nhơn</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/fontawesome/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/simple-datatables.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="p-0">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container-fluid">
-            <button class="btn btn-dark p-2" data-bs-toggle="collapse" data-bs-target="#sidebar">
-                <span class="navbar-toggler-icon"></span>
+
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="#" class="logo d-flex align-items-center">
+                <img src="" alt="logo">
+                <span class="d-none d-lg-block">QNU Library</span>
+            </a>
+            <button class="navbar-toggler toggle-sidebar-btn">
+                <span class="fa fa-bars"></span>
             </button>
-            @Html.ActionLink("Library", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button class="navbar-toggler d-flex d-lg-none order-3 p-2" data-bs-toggle="offcanvas" data-bs-target="#navbar" aria-controls="bdNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="offcanvas-lg offcanvas-end flex-grow-1 bg-dark" tabindex="-1" id="navbar" aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
-                <div class="offcanvas-header px-4 pb-0">
-                    <h5 class="offcanvas-title text-white">Bootstrap</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#navbar"></button>
-                </div>
+        </div><!-- End Logo -->
 
-                <div class="offcanvas-body p-4 pt-0 p-lg-0">
-                    <hr class="d-lg-none text-white-50">
-                    <ul class="navbar-nav flex-row flex-wrap">
-                        <li class="nav-item col-6 col-lg-auto">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link py-2 px-0 px-lg-2 active" })</li>
-                        <li class="nav-item col-6 col-lg-auto">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link py-2 px-0 px-lg-2" })</li>
-                        <li class="nav-item col-6 col-lg-auto">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link py-2 px-0 px-lg-2" })</li>
-                    </ul>
+    </header><!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
 
-                </div>
-            </div>
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Home")" class="nav-link collapsed">
+                    <span class="fa fa-lg fa-home"></span>
+                    <span>Trang chủ</span>
+                </a>
+            </li> <!-- End Home Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="forms-elements.html">
+                            <i class="bi bi-circle"></i><span>Form Elements</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="forms-layouts.html">
+                            <i class="bi bi-circle"></i><span>Form Layouts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="forms-editors.html">
+                            <i class="bi bi-circle"></i><span>Form Editors</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="forms-validation.html">
+                            <i class="bi bi-circle"></i><span>Form Validation</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Forms Nav -->
+
+            <li class="nav-heading">Quản lý</li>
+
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "NguoiDungs")" class="nav-link collapsed">
+                    <span class="fa fa-lg fa-users"></span>
+                    <span>Độc giả</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "TheThuViens")" class="nav-link collapsed">
+                    <span class="fa fa-lg fa-credit-card"></span>
+                    <span>Thẻ thư viện</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "ThongTinMuonSaches")" class="nav-link collapsed">
+                    <span class="fa fa-lg fa-calendar"></span>
+                    <span>Thông tin mượn sách</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "TrangThaiMuonSaches")" class="nav-link collapsed">
+                    <span class="fa fa-lg fa-info-circle"></span>
+                    <span>Tình trạng mượn sách</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Saches")" class="nav-link collapsed">
+                    <span class="fa fa-lg fa-book"></span>
+                    <span>Sách</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "TheLoais")" class="nav-link collapsed">
+                    <span class="fa fa-lg fa-list"></span>
+                    <span>Thể loại</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "TacGias")" class="nav-link collapsed">
+                    <span class="fa fa-lg fa-pencil"></span>
+                    <span>Tác giả</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "NhaXuatBans")" class="nav-link collapsed">
+                    <span class="fa fa-lg fa-share-square"></span>
+                    <span>Nhà xuất bản</span>
+                </a>
+            </li>
+
+        </ul>
+
+    </aside><!-- End Sidebar-->
+    @*@Html.ActionLink("Library", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+
+    <main id="main" class="main">
+
+        <section class="section dashboard">
+
+            @RenderBody()
+
+        </section>
+
+    </main><!-- End #main -->
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            &copy; Copyright <strong><span>Thư viện đại học Quy Nhơn @DateTime.Now.Year</span></strong>. All Rights Reserved
         </div>
-    </nav>
-
-    <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <div id="sidebar" class="collapse collapse-horizontal show col-4, col-md-3 col-lg-2 px-0 border-end border-2 vh-100 overflow-auto">
-
-                <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" >
-                    <ul class="nav nav-pills flex-column mb-auto">
-
-                        <li class="btn-toggle-nav">@Html.ActionLink("Độc giả", "Index", "NguoiDungs", null, new { @class = "nav-link link-dark rounded" })</li>
-                        <li class="btn-toggle-nav">@Html.ActionLink("Thông tin mượn sách", "Index", "ThongTinMuonSaches", null, new { @class = "nav-link link-dark rounded" })</li>
-                        <li class="btn-toggle-nav">@Html.ActionLink("Sách", "Index", "Saches", null, new { @class = "nav-link link-dark rounded" })</li>
-                        <li class="btn-toggle-nav">@Html.ActionLink("Thể loại", "Index", "TheLoais", null, new { @class = "nav-link link-dark rounded" })</li>
-                        <li class="btn-toggle-nav">@Html.ActionLink("Tác giả", "Index", "TacGias", null, new { @class = "nav-link link-dark rounded" })</li>
-                        <li class="btn-toggle-nav">@Html.ActionLink("Nhà xuất bản", "Index", "NhaXuatBans", null, new { @class = "nav-link link-dark rounded" })</li>
-                        
-                    </ul>
-                </div>
-
-            </div>
-            <main class="col">
-                <div class="container-fluid">
-                    @RenderBody()
-                    <hr />
-                    <footer>
-                        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-                    </footer>
-                </div>
-            </main>
+        <div class="credits">
+            Thực hiện bởi sinh viên đại học Quy Nhơn.
         </div>
-    </div>
+    </footer><!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><span class="fa fa-arrow-up"></span></a>
 
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/simple-datatables.js"></script>
+    <script src="~/Scripts/main.js"></script>
     @RenderSection("scripts", required: false)
+
+    <script>
+        $(document).ready(function () {
+            $('body').find('a[href="' + location.pathname + '"]')
+                .removeClass('collapsed');
+        });
+    </script>
 </body>
 </html>

@@ -15,7 +15,6 @@
         public NguoiDung()
         {
             DanhSachYeuThiches = new HashSet<DanhSachYeuThich>();
-            ThongTinMuonSaches = new HashSet<ThongTinMuonSach>();
         }
 
         [DataMember(Name = "id", Order = 0)]
@@ -51,7 +50,7 @@
         [DataMember(Name = "dateOfBirth", Order = 6)]
         [Display(Name = "Ngày sinh")]
         [DataType(DataType.Date)]
-        [Column(TypeName = "Date")]
+        [Column(TypeName = "date")]
         public DateTime? NgaySinh { get; set; }
 
         [DataMember(Name = "gender", Order = 7)]
@@ -81,15 +80,8 @@
         [StringLength(50)]
         public string SoThe { get; set; }
 
-        [DataMember(Name = "cardPassword", Order = 12)]
-        [Display(Name = "Mật khẩu thẻ")]
-        [StringLength(50)]
-        public string MatKhauThe { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public ICollection<DanhSachYeuThich> DanhSachYeuThiches { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public ICollection<ThongTinMuonSach> ThongTinMuonSaches { get; set; }
+        public TheThuVien TheThuVien { get; set; }
     }
 }

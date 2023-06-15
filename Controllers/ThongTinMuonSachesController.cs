@@ -20,8 +20,11 @@ namespace QuanLyThuVien.Controllers
             string query = Request.QueryString["q"];
             if (query == null)
                 query = "";
-            var thongTinMuonSaches = db.ThongTinMuonSaches.Where(t => t.NguoiDung.HoDem.Contains(query) || t.NguoiDung.Ten.Contains(query) || t.Sach.TieuDe.Contains(query)).Include(t => t.NguoiDung).Include(t => t.Sach);
-            return View(thongTinMuonSaches.ToList());
+            var thongTinMuonSaches = db.ThongTinMuonSaches.Where(t => t.SoThe.Contains(query) || t.Sach.TieuDe.Contains(query))
+                                                        .Include(t => t.TheThuVien)
+                                                        .Include(t => t.Sach)
+                                                        .ToList();
+            return View(thongTinMuonSaches);
         }
 
         // GET: ThongTinMuonSaches/Details/5
@@ -42,8 +45,9 @@ namespace QuanLyThuVien.Controllers
         // GET: ThongTinMuonSaches/Create
         public ActionResult Create()
         {
-            ViewBag.NguoiMuon_Id = new SelectList(db.NguoiDungs, "Id", "TenDangNhap");
+            ViewBag.SoThe = new SelectList(db.TheThuViens, "SoThe", "SoThe");
             ViewBag.Sach_Id = new SelectList(db.Saches, "Id", "TieuDe");
+            ViewBag.TrangThaiMuon_Id = new SelectList(db.TrangThaiMuonSaches, "Id", "TrangThaiMuon");
             return View();
         }
 
@@ -52,7 +56,7 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NguoiMuon_Id,Sach_Id,NgayMuon,NgayTra")] ThongTinMuonSach thongTinMuonSach)
+        public ActionResult Create([Bind(Include = "Id,SoThe,Sach_Id,NgayMuon,NgayTra,TrangThaiMuon_Id")] ThongTinMuonSach thongTinMuonSach)
         {
             if (ModelState.IsValid)
             {
@@ -62,8 +66,9 @@ namespace QuanLyThuVien.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.NguoiMuon_Id = new SelectList(db.NguoiDungs, "Id", "TenDangNhap", thongTinMuonSach.NguoiMuon_Id);
-            ViewBag.Sach_Id = new SelectList(db.Saches, "Id", "TieuDe", thongTinMuonSach.Sach_Id);
+            ViewBag.SoThe = new SelectList(db.TheThuViens, "SoThe", "SoThe");
+            ViewBag.Sach_Id = new SelectList(db.Saches, "Id", "TieuDe");
+            ViewBag.TrangThaiMuon_Id = new SelectList(db.TrangThaiMuonSaches, "Id", "TrangThaiMuon");
             return View(thongTinMuonSach);
         }
 
@@ -79,8 +84,9 @@ namespace QuanLyThuVien.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.NguoiMuon_Id = new SelectList(db.NguoiDungs, "Id", "TenDangNhap", thongTinMuonSach.NguoiMuon_Id);
-            ViewBag.Sach_Id = new SelectList(db.Saches, "Id", "TieuDe", thongTinMuonSach.Sach_Id);
+            ViewBag.SoThe = new SelectList(db.TheThuViens, "SoThe", "SoThe");
+            ViewBag.Sach_Id = new SelectList(db.Saches, "Id", "TieuDe");
+            ViewBag.TrangThaiMuon_Id = new SelectList(db.TrangThaiMuonSaches, "Id", "TrangThaiMuon");
             return View(thongTinMuonSach);
         }
 
@@ -89,7 +95,7 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,NguoiMuon_Id,Sach_Id,NgayMuon,NgayTra")] ThongTinMuonSach thongTinMuonSach)
+        public ActionResult Edit([Bind(Include = "Id,SoThe,Sach_Id,NgayMuon,NgayTra,TrangThaiMuon_Id")] ThongTinMuonSach thongTinMuonSach)
         {
             if (ModelState.IsValid)
             {
@@ -97,8 +103,9 @@ namespace QuanLyThuVien.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.NguoiMuon_Id = new SelectList(db.NguoiDungs, "Id", "TenDangNhap", thongTinMuonSach.NguoiMuon_Id);
-            ViewBag.Sach_Id = new SelectList(db.Saches, "Id", "TieuDe", thongTinMuonSach.Sach_Id);
+            ViewBag.SoThe = new SelectList(db.TheThuViens, "SoThe", "SoThe");
+            ViewBag.Sach_Id = new SelectList(db.Saches, "Id", "TieuDe");
+            ViewBag.TrangThaiMuon_Id = new SelectList(db.TrangThaiMuonSaches, "Id", "TrangThaiMuon");
             return View(thongTinMuonSach);
         }
 
