@@ -12,7 +12,8 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
+<div class="card overflow-auto">
+    <div class="card-body">
         <h4>TheThuVien</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -46,12 +47,13 @@
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+    }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
