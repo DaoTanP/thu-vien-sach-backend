@@ -18,7 +18,7 @@
             ThongTinMuonSaches = new HashSet<ThongTinMuonSach>();
         }
 
-        public Sach(Sach s)
+/*        public Sach(Sach s)
         {
             Id = s.Id;
             TieuDe = s.TieuDe;
@@ -35,7 +35,7 @@
             SoLuong = s.SoLuong;
             DanhSachYeuThiches = s.DanhSachYeuThiches;
             ThongTinMuonSaches = s.ThongTinMuonSaches;
-        }
+        }*/
 
         [DataMember(Name = "id", Order = 1)]
         [StringLength(100)]
