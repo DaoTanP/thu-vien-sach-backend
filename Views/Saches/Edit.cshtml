@@ -5,14 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Chỉnh sửa bản ghi <strong>@Html.DisplayFor(model => model.TieuDe)</strong></h4>
-
 @using (Html.BeginForm("Edit", "Saches", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
 <div class="card overflow-auto">
     <div class="card-body">
+        <h1 class="card-title">Chỉnh sửa bản ghi <strong>@Html.DisplayFor(model => model.Id)</strong></h1>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="row">

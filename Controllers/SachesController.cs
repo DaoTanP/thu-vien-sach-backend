@@ -17,12 +17,7 @@ namespace QuanLyThuVien.Controllers
         // GET: Saches
         public ActionResult Index()
         {
-            string query = Request.QueryString["q"];
-            if (query == null)
-                query = "";
-
-            var saches = db.Saches.Where(s => s.TieuDe.Contains(query))
-                                .Include(s => s.NhaXuatBan)
+            var saches = db.Saches.Include(s => s.NhaXuatBan)
                                 .Include(s => s.TacGia)
                                 .Include(s => s.TheLoai)
                                 .ToList();

@@ -17,13 +17,7 @@ namespace QuanLyThuVien.Controllers
         // GET: TacGias
         public ActionResult Index()
         {
-            string query = Request.QueryString["q"];
-            if (query == null)
-                query = "";
-
-            return View("Index", db.TacGias.Where(tacgia => 
-                tacgia.Ten.Contains(query) || tacgia.Ten.Contains(query)
-                ).ToList());
+            return View(db.TacGias.ToList());
         }
 
         // GET: TacGias/Create
@@ -37,7 +31,7 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "HoDem,Ten")] TacGia tacGia)
+        public ActionResult Create([Bind(Include = "Ten")] TacGia tacGia)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +64,7 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,HoDem,Ten")] TacGia tacGia)
+        public ActionResult Edit([Bind(Include = "Id,Ten")] TacGia tacGia)
         {
             if (ModelState.IsValid)
             {

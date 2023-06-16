@@ -20,21 +20,6 @@ namespace QuanLyThuVien.Controllers
             return View(db.TrangThaiMuonSaches.ToList());
         }
 
-        // GET: TrangThaiMuonSaches/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TrangThaiMuonSach trangThaiMuonSach = db.TrangThaiMuonSaches.Find(id);
-            if (trangThaiMuonSach == null)
-            {
-                return HttpNotFound();
-            }
-            return View(trangThaiMuonSach);
-        }
-
         // GET: TrangThaiMuonSaches/Create
         public ActionResult Create()
         {
@@ -46,10 +31,11 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TrangThaiMuon")] TrangThaiMuonSach trangThaiMuonSach)
+        public ActionResult Create([Bind(Include = "TrangThaiMuon")] TrangThaiMuonSach trangThaiMuonSach)
         {
             if (ModelState.IsValid)
             {
+                trangThaiMuonSach.Id = Guid.NewGuid().ToString("n");
                 db.TrangThaiMuonSaches.Add(trangThaiMuonSach);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -101,7 +87,7 @@ namespace QuanLyThuVien.Controllers
             {
                 return HttpNotFound();
             }
-            return View(trangThaiMuonSach);
+            return PartialView("~/Views/Shared/Delete.cshtml", new DeleteViewModel { Id = trangThaiMuonSach.Id, Name = trangThaiMuonSach.TrangThaiMuon });
         }
 
         // POST: TrangThaiMuonSaches/Delete/5

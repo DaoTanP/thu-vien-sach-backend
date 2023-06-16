@@ -17,21 +17,18 @@ namespace QuanLyThuVien.Controllers
         // GET: DanhSachYeuThiches
         public ActionResult Index()
         {
-            string query = Request.QueryString["q"];
-            if (query == null)
-                query = "";
-
             var danhSachYeuThiches = db.DanhSachYeuThiches
                 .Include(d => d.NguoiDung)
                 .Include(d => d.Sach)
-                .Where(d => d.NguoiDung.HoDem.Contains(query) || d.NguoiDung.Ten.Contains(query) || d.Sach.TieuDe.Contains(query));
-            return View(danhSachYeuThiches.ToList());
+                .ToList();
+
+            return View(danhSachYeuThiches);
         }
 
         // GET: DanhSachYeuThiches/Create
         public ActionResult Create()
         {
-            ViewBag.NguoiDung_Id = new SelectList(db.NguoiDungs, "Id", "HoTen");
+            ViewBag.NguoiDung_Id = new SelectList(db.NguoiDungs, "Id", "TenDangNhap");
             ViewBag.Sach_Id = new SelectList(db.Saches, "Id", "TieuDe");
             return View();
         }

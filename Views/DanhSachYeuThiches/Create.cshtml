@@ -1,12 +1,9 @@
 ﻿@model QuanLyThuVien.Models.DanhSachYeuThich
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Danh sách yêu thích - Tạo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Tạo bản ghi</h2>
-
 
 @using (Html.BeginForm())
 {
@@ -14,6 +11,7 @@
 
     <div class="card overflow-auto">
         <div class="card-body">
+            <h1 class="card-title">Tạo bản ghi</h1>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             <div class="row">

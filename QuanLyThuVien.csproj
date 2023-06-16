@@ -172,10 +172,10 @@
     <Compile Include="Models\Sach.cs" />
     <Compile Include="Models\TacGia.cs" />
     <Compile Include="Models\TheLoai.cs" />
+    <Compile Include="Models\TheThuVien.cs" />
     <Compile Include="Models\ThongTinMuonSach.cs" />
     <Compile Include="Models\ThuVien.cs" />
     <Compile Include="Models\UserPasswordChangeViewModel.cs" />
-    <Compile Include="Models\TheThuVien.cs" />
     <Compile Include="Models\TrangThaiMuonSach.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -296,16 +296,12 @@
     <Content Include="Views\DanhSachYeuThiches\Create.cshtml" />
     <Content Include="Views\DanhSachYeuThiches\Edit.cshtml" />
     <Content Include="Views\DanhSachYeuThiches\Index.cshtml" />
-    <Content Include="Views\TheThuViens\Create.cshtml" />
-    <Content Include="Views\TheThuViens\Delete.cshtml" />
-    <Content Include="Views\TheThuViens\Details.cshtml" />
-    <Content Include="Views\TheThuViens\Edit.cshtml" />
-    <Content Include="Views\TheThuViens\Index.cshtml" />
     <Content Include="Views\TrangThaiMuonSaches\Create.cshtml" />
-    <Content Include="Views\TrangThaiMuonSaches\Delete.cshtml" />
-    <Content Include="Views\TrangThaiMuonSaches\Details.cshtml" />
     <Content Include="Views\TrangThaiMuonSaches\Edit.cshtml" />
     <Content Include="Views\TrangThaiMuonSaches\Index.cshtml" />
+    <Content Include="Views\TheThuViens\Index.cshtml" />
+    <Content Include="Views\TheThuViens\Create.cshtml" />
+    <Content Include="Views\TheThuViens\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

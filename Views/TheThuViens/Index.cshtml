@@ -1,19 +1,22 @@
 ﻿@model IEnumerable<QuanLyThuVien.Models.TheThuVien>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Thẻ thư viện";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h1 class="pagetitle">Thẻ thư viện</h1>
 
 <div class="card overflow-auto">
     <div class="card-body">
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        <table class="table">
+        <h5 class="card-title">Tổng số @Model.Count() bản ghi</h5>
+        @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary rounded-pill mb-3" })
+    <table class="table table-borderless datatable">
+        <thead>
             <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoThe)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.MatKhauThe)
                 </th>
@@ -22,10 +25,14 @@
                 </th>
                 <th></th>
             </tr>
-
+        </thead>
+        <tbody>
             @foreach (var item in Model)
             {
                 <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoThe)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.MatKhauThe)
                     </td>
@@ -33,12 +40,17 @@
                         @Html.DisplayFor(modelItem => item.NgayHetHan)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.SoThe }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.SoThe }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.SoThe })
+                        <a href="@Url.Action("Edit", new { id = item.SoThe })" class="btn btn-outline-secondary">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+
+                        <button class="btn btn-outline-danger" onclick="getDeleteModal('@item.SoThe')">
+                            <i class="fa fa-trash"></i>
+                        </button>
                     </td>
                 </tr>
             }
-        </table>
+        </tbody>
+    </table>
     </div>
 </div>

@@ -76,7 +76,6 @@ C:\Users\LENOVO\source\repos\QuanLyThuVien\bin\System.Web.WebPages.Razor.xml
 C:\Users\LENOVO\source\repos\QuanLyThuVien\bin\Newtonsoft.Json.xml
 C:\Users\LENOVO\source\repos\QuanLyThuVien\bin\Antlr3.Runtime.pdb
 C:\Users\LENOVO\source\repos\QuanLyThuVien\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\LENOVO\source\repos\QuanLyThuVien\obj\Debug\QuanLyThuVien.csproj.AssemblyReference.cache
 C:\Users\LENOVO\source\repos\QuanLyThuVien\obj\Debug\QuanLyThuVien.csproj.CoreCompileInputs.cache
 C:\Users\LENOVO\source\repos\QuanLyThuVien\obj\Debug\QuanLyThuVien.csproj.CopyComplete
 C:\Users\LENOVO\source\repos\QuanLyThuVien\obj\Debug\QuanLyThuVien.dll
@@ -184,3 +183,4 @@ E:\GitHub\thu-vien-sach-backend\obj\Debug\QuanLyThuVien.csproj.CoreCompileInputs
 E:\GitHub\thu-vien-sach-backend\obj\Debug\QuanLyThuVien.csproj.CopyComplete
 E:\GitHub\thu-vien-sach-backend\obj\Debug\QuanLyThuVien.dll
 E:\GitHub\thu-vien-sach-backend\obj\Debug\QuanLyThuVien.pdb
+C:\Users\LENOVO\source\repos\QuanLyThuVien\obj\Debug\QuanLyThuVien.csproj.AssemblyReference.cache

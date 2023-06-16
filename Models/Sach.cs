@@ -57,7 +57,7 @@
         [StringLength(100)]
         public string TacGia_Id { get; set; }
 
-        [Display(Name = "Nhà xuất bản")]
+        [Display(Name = "NXB")]
         [Required]
         [StringLength(100)]
         public string NhaXuatBan_Id { get; set; }
@@ -83,7 +83,7 @@
         public string AnhBia { get; set; }
 
         [DataMember(Name = "inStock", Order = 10)]
-        [Display(Name = "Số lượng")]
+        [Display(Name = "Kho")]
         public int SoLuong { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

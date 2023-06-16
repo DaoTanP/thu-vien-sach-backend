@@ -5,36 +5,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Chỉnh sửa bản ghi <strong>@Html.DisplayFor(model => model.TenNhaXuatBan)</strong></h4>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-<div class="card overflow-auto">
-    <div class="card-body">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+    <div class="card overflow-auto">
+        <div class="card-body">
+            <h1 class="card-title">Chỉnh sửa bản ghi <strong>@Html.DisplayFor(model => model.TenNhaXuatBan)</strong></h1>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group mb-3">
-            @Html.LabelFor(model => model.TenNhaXuatBan)
-            <div class="col">
-                @Html.EditorFor(model => model.TenNhaXuatBan, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TenNhaXuatBan, "", new { @class = "text-danger" })
+            <div class="form-group mb-3">
+                @Html.LabelFor(model => model.TenNhaXuatBan)
+                <div class="col">
+                    @Html.EditorFor(model => model.TenNhaXuatBan, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TenNhaXuatBan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-auto mb-3">
+                <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                    Quay lại
+                </a>
+                <input type="submit" value="Lưu" class="btn btn-primary" />
             </div>
         </div>
-
-        <div class="form-group">
-            <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
-                Quay lại
-            </a>
-            <input type="submit" value="Lưu" class="btn btn-primary" />
-        </div>
     </div>
-  </div>
 }
 
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

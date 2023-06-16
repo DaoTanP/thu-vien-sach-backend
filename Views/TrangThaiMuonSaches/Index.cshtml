@@ -1,25 +1,26 @@
 ﻿@model IEnumerable<QuanLyThuVien.Models.TrangThaiMuonSach>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Trạng thái mượn sách";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h1 class="pagetitle">Trạng thái mượn sách</h1>
 
 <div class="card overflow-auto">
     <div class="card-body">
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        <table class="table">
+        <h5 class="card-title">Tổng số @Model.Count() bản ghi</h5>
+        @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary rounded-pill mb-3" })
+    <table class="table table-borderless datatable">
+        <thead>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.TrangThaiMuon)
                 </th>
                 <th></th>
             </tr>
-
+        </thead>
+        <tbody>
             @foreach (var item in Model)
             {
                 <tr>
@@ -27,13 +28,17 @@
                         @Html.DisplayFor(modelItem => item.TrangThaiMuon)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-outline-secondary">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+
+                        <button class="btn btn-outline-danger" onclick="getDeleteModal('@item.Id')">
+                            <i class="fa fa-trash"></i>
+                        </button>
                     </td>
                 </tr>
             }
-
-        </table>
+        </tbody>
+    </table>
     </div>
 </div>

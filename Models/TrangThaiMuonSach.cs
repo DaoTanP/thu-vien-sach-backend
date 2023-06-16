@@ -1,4 +1,4 @@
-namespace QuanLyThuVien.Models
+﻿namespace QuanLyThuVien.Models
 {
     using System;
     using System.Collections.Generic;
@@ -18,11 +18,12 @@ namespace QuanLyThuVien.Models
         [StringLength(50)]
         public string Id { get; set; }
 
+        [Display(Name = "Trạng thái mượn")]
         [Required]
         [StringLength(50)]
         public string TrangThaiMuon { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThongTinMuonSach> ThongTinMuonSaches { get; set; }
+        public ICollection<ThongTinMuonSach> ThongTinMuonSaches { get; set; }
     }
 }

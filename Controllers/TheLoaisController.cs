@@ -17,11 +17,7 @@ namespace QuanLyThuVien.Controllers
         // GET: TheLoais
         public ActionResult Index()
         {
-            string query = Request.QueryString["q"];
-            if (query == null)
-                query = "";
-
-            return View("Index", db.TheLoais.Where(theLoai => theLoai.TenTheLoai.Contains(query)).ToList());
+            return View(db.TheLoais.ToList());
         }
 
         // GET: TheLoais/Create

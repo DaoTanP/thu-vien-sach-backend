@@ -17,14 +17,11 @@ namespace QuanLyThuVien.Controllers
         // GET: ThongTinMuonSaches
         public ActionResult Index()
         {
-            string query = Request.QueryString["q"];
-            if (query == null)
-                query = "";
-            var thongTinMuonSaches = db.ThongTinMuonSaches.Where(t => t.SoThe.Contains(query) || t.Sach.TieuDe.Contains(query))
-                                                        .Include(t => t.TheThuVien)
-                                                        .Include(t => t.Sach)
-                                                        .ToList();
-            return View(thongTinMuonSaches);
+            var tt = db.ThongTinMuonSaches.Include(t => t.TheThuVien)
+                                         .Include(t => t.Sach)
+                                         .Include(t => t.TrangThaiMuonSach)
+                                         .ToList();
+            return View(tt);
         }
 
         // GET: ThongTinMuonSaches/Details/5

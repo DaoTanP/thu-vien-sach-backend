@@ -1,4 +1,4 @@
-namespace QuanLyThuVien.Models
+﻿namespace QuanLyThuVien.Models
 {
     using System;
     using System.Collections.Generic;
@@ -16,14 +16,21 @@ namespace QuanLyThuVien.Models
             ThongTinMuonSaches = new HashSet<ThongTinMuonSach>();
         }
 
+        [Display(Name = "Số thẻ")]
         [Key]
         [StringLength(50)]
         public string SoThe { get; set; }
 
+        [Display(Name = "Mật khẩu")]
         [Required]
         [StringLength(50)]
         public string MatKhauThe { get; set; }
 
+        [Display(Name = "Ngày cấp")]
+        [Column(TypeName = "date")]
+        public DateTime NgayCap { get; set; }
+
+        [Display(Name = "Ngày hết hạn")]
         [Column(TypeName = "date")]
         public DateTime NgayHetHan { get; set; }
 

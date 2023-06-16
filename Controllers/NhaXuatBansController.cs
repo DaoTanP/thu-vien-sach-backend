@@ -16,11 +16,7 @@ namespace QuanLyThuVien.Controllers
 
         public ActionResult Index()
         {
-            string query = Request.QueryString["q"];
-            if (query == null)
-                query = "";
-
-            return View("Index", db.NhaXuatBans.Where(nhaXuatBan => nhaXuatBan.TenNhaXuatBan.Contains(query)).ToList());
+            return View(db.NhaXuatBans.ToList());
         }
 
         // GET: NhaXuatBans/Create

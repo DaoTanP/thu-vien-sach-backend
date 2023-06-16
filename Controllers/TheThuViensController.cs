@@ -20,21 +20,6 @@ namespace QuanLyThuVien.Controllers
             return View(db.TheThuViens.ToList());
         }
 
-        // GET: TheThuViens/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TheThuVien theThuVien = db.TheThuViens.Find(id);
-            if (theThuVien == null)
-            {
-                return HttpNotFound();
-            }
-            return View(theThuVien);
-        }
-
         // GET: TheThuViens/Create
         public ActionResult Create()
         {
@@ -50,6 +35,11 @@ namespace QuanLyThuVien.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(theThuVien.SoThe == "")
+                    theThuVien.SoThe = Guid.NewGuid().ToString("n");
+
+                theThuVien.NgayCap = DateTime.Now;
+
                 db.TheThuViens.Add(theThuVien);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -101,7 +91,7 @@ namespace QuanLyThuVien.Controllers
             {
                 return HttpNotFound();
             }
-            return View(theThuVien);
+            return PartialView("~/Views/Shared/Delete.cshtml", new DeleteViewModel { Id = theThuVien.SoThe, Name = theThuVien.SoThe });
         }
 
         // POST: TheThuViens/Delete/5
