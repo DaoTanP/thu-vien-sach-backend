@@ -87,21 +87,6 @@ namespace QuanLyThuVien.Controllers
                             : true)
                     .ToList();
 
-            /*var sach = db.Saches
-                .Include(s => s.TheLoai)
-                .Include(s => s.TacGia)
-                .Include(s => s.NhaXuatBan)
-                .Where(s =>
-                    s.TieuDe.Contains(query.bookTitle ?? "") &&
-                    s.TheLoai.TenTheLoai.Contains(query.category ?? "") &&
-                    s.TacGia.Ten.Contains(query.author ?? "") &&
-                    s.NhaXuatBan.TenNhaXuatBan.Contains(query.publisher ?? "") &&
-                    (s.NgayXuatBan != null && query.publishedFrom != null && query.publishedTo != null ?
-                        (DateTime.Compare((DateTime)s.NgayXuatBan, (DateTime)query.publishedFrom) >= 0 &&
-                        DateTime.Compare((DateTime)s.NgayXuatBan, (DateTime)query.publishedFrom) <= 0)
-                        : true))
-                .ToList();*/
-
             if (sach == null)
             {
                 return NotFound();
@@ -114,6 +99,46 @@ namespace QuanLyThuVien.Controllers
             });
 
             return Ok(sach);
+        }
+
+        // GET: api/book/topBorrow
+        [Route("api/book/topBorrow")]
+        public IHttpActionResult GetTopBorrow()
+        {
+            var data = db.ThongTinMuonSaches
+                        .Include(t => t.Sach)
+                        .Select(t => t.Sach)
+                        .Select(t => new
+                        {
+                            Sach = t,
+                            LuotMuon = db.ThongTinMuonSaches.Select(tt => tt.Sach_Id == t.Id).Count()
+                        }).OrderBy(s => s.LuotMuon)
+                        .Take(10)
+                        .Select(s => s.Sach)
+                        .ToList();
+
+            data.All(s =>
+            {
+                s.AnhBia = Url.Content("~/") + "Content/images/Sach/" + s.AnhBia;
+                return true;
+            });
+
+            return Ok(data);
+        }
+
+        // GET: api/book/randomRecommendation
+        [Route("api/book/randomRecommendation")]
+        public IHttpActionResult GetRandomRecommendation()
+        {
+            var data = db.Saches.OrderBy(x => Guid.NewGuid()).Take(10).ToList();
+
+            data.All(s =>
+            {
+                s.AnhBia = Url.Content("~/") + "Content/images/Sach/" + s.AnhBia;
+                return true;
+            });
+
+            return Ok(data);
         }
 
         // GET: api/book/category
@@ -151,7 +176,7 @@ namespace QuanLyThuVien.Controllers
         // GET: api/book/publisher
         [Route("api/book/publisher")]
         [HttpGet]
-        [ResponseType(typeof(TacGia))]
+        [ResponseType(typeof(NhaXuatBan))]
         public IHttpActionResult GetNhaXuatBan()
         {
             var result = db.NhaXuatBans.ToList();
