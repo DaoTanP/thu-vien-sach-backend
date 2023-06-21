@@ -270,6 +270,46 @@ namespace QuanLyThuVien.Controllers
             return false;
         }
         
+        [Route("api/user/libraryCard")]
+        [HttpPost]
+        public IHttpActionResult PostLibraryCard(LibraryCardViewModel c)
+        {
+            if (c == null || db.NguoiDungs.Find(c.UserId) == null)
+            {
+                return BadRequest();
+            }
+
+            TheThuVien t = db.TheThuViens.Find(c.CardNumber);
+            if(t == null || t.MatKhauThe != c.Password || DateTime.Compare(t.NgayHetHan, DateTime.Now.Date) < 0)
+            {
+                return NotFound();
+            }
+
+            NguoiDung n = db.NguoiDungs.Find(c.UserId);
+            if(n == null)
+            {
+                return Conflict();
+            }
+
+            n.SoThe = t.SoThe;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                return Conflict();
+                throw;
+            }
+
+            return Ok(n.SoThe);
+        }
+        
         [Route("api/user/{id}/favorite")]
         [HttpGet]
         public IHttpActionResult GetFavoriteBooks(string id)
@@ -342,39 +382,6 @@ namespace QuanLyThuVien.Controllers
 
             return Ok(true);
         }
-        
-        [Route("api/user/borrow")]
-        [HttpPost]
-        public IHttpActionResult Borrow(ThongTinMuonSach borrowInfo)
-        {
-            if (borrowInfo == null || 
-                db.ThongTinMuonSaches.Where(t => t.SoThe == borrowInfo.SoThe) == null || 
-                db.Saches.Find(borrowInfo.Sach_Id) == null ||
-                !IsAvailableToBorrow(borrowInfo.Sach_Id))
-                return StatusCode(HttpStatusCode.BadRequest);
-
-            borrowInfo.Id = Guid.NewGuid().ToString("n");
-            borrowInfo.TrangThaiMuon_Id = db.TrangThaiMuonSaches.Where(t => t.TrangThaiMuon == "Đang chờ duyệt").First().Id;
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.ThongTinMuonSaches.Add(borrowInfo);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                return Conflict();
-                throw;
-            }
-
-            return Ok();
-        }
 
         protected override void Dispose(bool disposing)
         {
@@ -383,21 +390,6 @@ namespace QuanLyThuVien.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool IsAvailableToBorrow(string bookId)
-        {
-            var borrowing = db.ThongTinMuonSaches.Include(t => t.TrangThaiMuonSach)
-                                .Where(t => t.TrangThaiMuonSach.TrangThaiMuon == "Đang mượn")
-                                .Where(t => t.Sach_Id == bookId)
-                                .Count();
-
-            var totalInStock = db.Saches.Find(bookId).SoLuong;
-
-            if (totalInStock - borrowing > 0)
-                return true;
-
-            return false;
         }
 
         private ICollection<Sach> FavoriteBooks(string userId)

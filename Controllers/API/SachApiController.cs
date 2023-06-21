@@ -189,6 +189,39 @@ namespace QuanLyThuVien.Controllers
             return Ok(result);
         }
 
+        [Route("api/book/borrow")]
+        [HttpPost]
+        public IHttpActionResult Borrow(ThongTinMuonSach borrowInfo)
+        {
+            if (borrowInfo == null ||
+                db.TheThuViens.Where(t => t.SoThe == borrowInfo.SoThe) == null ||
+                db.Saches.Find(borrowInfo.Sach_Id) == null ||
+                !IsAvailableToBorrow(borrowInfo.Sach_Id))
+                return StatusCode(HttpStatusCode.BadRequest);
+
+            borrowInfo.Id = Guid.NewGuid().ToString("n");
+            borrowInfo.TrangThaiMuon_Id = db.TrangThaiMuonSaches.Where(t => t.TrangThaiMuon == "Đang chờ duyệt").First().Id;
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.ThongTinMuonSaches.Add(borrowInfo);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                return Conflict();
+                throw;
+            }
+
+            return Ok();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -196,6 +229,21 @@ namespace QuanLyThuVien.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool IsAvailableToBorrow(string bookId)
+        {
+            var borrowing = db.ThongTinMuonSaches.Include(t => t.TrangThaiMuonSach)
+                                .Where(t => t.TrangThaiMuonSach.TrangThaiMuon == "Đang mượn")
+                                .Where(t => t.Sach_Id == bookId)
+                                .Count();
+
+            var totalInStock = db.Saches.Find(bookId).SoLuong;
+
+            if (totalInStock - borrowing > 0)
+                return true;
+
+            return false;
         }
 
         private bool SachExists(string id)

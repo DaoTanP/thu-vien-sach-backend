@@ -39,6 +39,7 @@
         [Column(TypeName = "date")]
         public DateTime NgayTra { get; set; }
 
+        /*[DataMember(Name = "status", Order = 6)]*/
         [Display(Name = "Trạng thái")]
         [Required]
         [StringLength(50)]

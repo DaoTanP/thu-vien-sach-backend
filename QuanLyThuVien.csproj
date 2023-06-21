@@ -167,6 +167,7 @@
     <Compile Include="Models\BookQueryViewModel.cs" />
     <Compile Include="Models\DanhSachYeuThich.cs" />
     <Compile Include="Models\DeleteViewModel.cs" />
+    <Compile Include="Models\LibraryCardViewModel.cs" />
     <Compile Include="Models\NguoiDung.cs" />
     <Compile Include="Models\NhaXuatBan.cs" />
     <Compile Include="Models\Sach.cs" />
