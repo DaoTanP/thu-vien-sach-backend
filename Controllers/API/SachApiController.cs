@@ -202,10 +202,10 @@ namespace QuanLyThuVien.Controllers
             borrowInfo.Id = Guid.NewGuid().ToString("n");
             borrowInfo.TrangThaiMuon_Id = db.TrangThaiMuonSaches.Where(t => t.TrangThaiMuon == "Đang chờ duyệt").First().Id;
 
-            if (!ModelState.IsValid)
+            /*if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
+            }*/
 
             db.ThongTinMuonSaches.Add(borrowInfo);
 
